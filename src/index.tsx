@@ -2,11 +2,11 @@ import { Action, ActionPanel, Color, Icon, List } from "@raycast/api";
 import React from "react";
 
 const Wareki = {
-  reiwa: { start: 2019, label: "令和", prefixes: ["令和", "令", "R"] },
-  heisei: { start: 1989, label: "平成", prefixes: ["平成", "平", "H"] },
-  showa: { start: 1926, label: "昭和", prefixes: ["昭和", "昭", "S"] },
-  taisho: { start: 1912, label: "大正", prefixes: ["大正", "大", "T"] },
-  meiji: { start: 1868, label: "明治", prefixes: ["明治", "明", "M"] },
+  reiwa: { start: 2019, label: "令和", prefixes: ["令和", "令", "R", "r"] },
+  heisei: { start: 1989, label: "平成", prefixes: ["平成", "平", "H", "h"] },
+  showa: { start: 1926, label: "昭和", prefixes: ["昭和", "昭", "S", "s"] },
+  taisho: { start: 1912, label: "大正", prefixes: ["大正", "大", "T", "t"] },
+  meiji: { start: 1868, label: "明治", prefixes: ["明治", "明", "M", "m"] },
 };
 
 type WarekiKey = keyof typeof Wareki;
