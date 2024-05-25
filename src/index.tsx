@@ -2,11 +2,11 @@ import { Action, ActionPanel, Color, Icon, List } from "@raycast/api";
 import React from "react";
 
 const Wareki = {
-  reiwa: { start: 2019, label: "令和", prefixes: ["令和", "令", "R", "r"] },
-  heisei: { start: 1989, label: "平成", prefixes: ["平成", "平", "H", "h"] },
-  showa: { start: 1926, label: "昭和", prefixes: ["昭和", "昭", "S", "s"] },
-  taisho: { start: 1912, label: "大正", prefixes: ["大正", "大", "T", "t"] },
-  meiji: { start: 1868, label: "明治", prefixes: ["明治", "明", "M", "m"] },
+  reiwa: { start: 2019, end: null, label: "令和", prefixes: ["令和", "令", "R", "r"] },
+  heisei: { start: 1989, end: 2019, label: "平成", prefixes: ["平成", "平", "H", "h"] },
+  showa: { start: 1926, end: 1989, label: "昭和", prefixes: ["昭和", "昭", "S", "s"] },
+  taisho: { start: 1912, end: 1926, label: "大正", prefixes: ["大正", "大", "T", "t"] },
+  meiji: { start: 1868, end: 1912, label: "明治", prefixes: ["明治", "明", "M", "m"] },
 };
 
 type WarekiKey = keyof typeof Wareki;
@@ -14,10 +14,12 @@ type WarekiKey = keyof typeof Wareki;
 const calc = (targetYear: number) => {
   return Object.keys(Wareki).reduce(
     (prev, current) => {
-      const { start, label } = Wareki[current as WarekiKey];
+      const { start, end, label } = Wareki[current as WarekiKey];
       if (targetYear < start) return prev;
 
-      return [...prev, `${label}${targetYear - start + 1}年`];
+      return end && targetYear > end
+        ? [...prev, `(${label}${targetYear - start + 1}年)`]
+        : [...prev, `${label}${targetYear - start + 1}年`];
     },
     [`西暦${targetYear}年`]
   );
